@@ -1,0 +1,26 @@
+# create docker network = ( docker network create docker-network )
+version: '3.6'
+services:
+    abdi-mysql:
+        container_name: abdi-mysql
+        image: mysql:5.7
+        ports:
+         - "3306:3306"
+        environment:
+          MYSQL_USER: docker
+          MYSQL_PASSWORD: abdi333
+          MYSQL_ROOT_PASSWORD: abdi333 # password root mysql
+        entrypoint: # create db if not exist
+          sh -c "
+           echo 'CREATE DATABASE IF NOT EXISTS abdi_db; CREATE DATABASE IF NOT EXISTS abdi_findata; CREATE DATABASE IF NOT EXISTS abdi_finance;' > /docker-entrypoint-initdb.d/init.sql;
+           /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8 --collation-server=utf8_general_ci "  
+        volumes:
+         - mysql-data:/var/lib/mysql:rw
+         - ./my.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  docker-network:
+    external: true
