@@ -1,2 +1,2 @@
-# docker-compose-mysql
+# docker compose mysql
 advanced mysql docker compose
