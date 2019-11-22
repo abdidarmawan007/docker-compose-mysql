@@ -16,12 +16,13 @@ services:
            /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8 --collation-server=utf8_general_ci "  
         volumes:
          - mysql-data:/var/lib/mysql:rw # persistent volume
+         #- mysql-data-ram:/var/lib/mysql:rw # ram/memory volume
          - ./my.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf # config mysql server
 volumes:
   mysql-data:
     driver: local
 
-### ram storage for faster testing code or need fast insert and query
+### ram/memory storage for faster testing code or need fast insert and query
 #volumes:
 #  mysql-data-ram:
 #    driver_opts:
