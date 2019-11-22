@@ -21,6 +21,13 @@ volumes:
   mysql-data:
     driver: local
 
+### ram storage for faster testing code or need fast insert and query
+#volumes:
+#  mysql-data-ram:
+#    driver_opts:
+#      type: tmpfs
+#      device: tmpfs
+
 networks:
   docker-network:
     external: true
